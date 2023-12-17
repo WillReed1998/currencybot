@@ -3,7 +3,7 @@ package com.project.currencybot.privat;
 import lombok.Data;
 
 @Data
-public class CurrencyModel {
+public class CurrencyModelPrivat {
     String ccy;
     String base_ccy;
     private float buy;

@@ -1,7 +1,9 @@
 package com.project.currencybot.config;
 
-import com.project.currencybot.privat.CurrencyModel;
-import com.project.currencybot.privat.CurrencyService;
+import com.project.currencybot.mono.CurrencyModelMono;
+import com.project.currencybot.mono.CurrencyServiceMono;
+import com.project.currencybot.privat.CurrencyModelPrivat;
+import com.project.currencybot.privat.CurrencyServicePrivat;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -29,7 +31,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        CurrencyModel currencyModel = new CurrencyModel();
+        CurrencyModelPrivat currencyModelPrivat = new CurrencyModelPrivat();
+        CurrencyModelMono currencyModelMono = new CurrencyModelMono();
 
         if(update.hasMessage() && update.getMessage().hasText()){
             String messageText = update.getMessage().getText();
@@ -39,23 +42,31 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/start":
                     startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
                     break;
-                case "/Privat":
+                case "/privat":
                     try {
-                        String currencyInfo = CurrencyService.getCurrencyRate(new CurrencyModel());
+                        String currencyInfo = CurrencyServicePrivat.getCurrencyRatePrivat(new CurrencyModelPrivat());
                         sendMessage(chatId, currencyInfo);
                     } catch (IOException | ParseException e) {
                         throw new RuntimeException(e);
                     }
                     break;
-
+                case "/mono":
+                    try {
+                        String currencyInfo = CurrencyServiceMono.getCurrencyRateMono(new CurrencyModelMono());
+                        sendMessage(chatId, currencyInfo);
+                    } catch (IOException | ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
     }
 
 
     private void startCommandReceived(Long chatId, String name) {
-        String answer = "Hi, " + name + ", nice to meet you!" + "\n" +
-                "Enter the official exchange rates in Privatbank";
+        String answer = "Вітаю, " + name + "\n" +
+                "Натисни /privat щоб отримати курс валют Приватбанку" + "\n" +
+                "Натисни /mono щоб отримати курс валют Приватбанку";
         sendMessage(chatId, answer);
     }
 
