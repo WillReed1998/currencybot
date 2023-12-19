@@ -1,11 +1,11 @@
-package com.project.currencybot.privat;
+package com.project.currencybot.bank.privat;
 
 import lombok.Data;
 
 @Data
 public class CurrencyModelPrivat {
-    String ccy;
-    String base_ccy;
+    private String ccy;
+    private String base_ccy;
     private float buy;
     private float sale;
 }

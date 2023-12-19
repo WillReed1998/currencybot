@@ -1,4 +1,4 @@
-package com.project.currencybot.privat;
+package com.project.currencybot.bank.privat;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

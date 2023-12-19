@@ -1,9 +1,9 @@
 package com.project.currencybot.config;
 
-import com.project.currencybot.mono.CurrencyModelMono;
-import com.project.currencybot.mono.CurrencyServiceMono;
-import com.project.currencybot.privat.CurrencyModelPrivat;
-import com.project.currencybot.privat.CurrencyServicePrivat;
+import com.project.currencybot.bank.mono.CurrencyModelMono;
+import com.project.currencybot.bank.mono.CurrencyServiceMono;
+import com.project.currencybot.bank.privat.CurrencyModelPrivat;
+import com.project.currencybot.bank.privat.CurrencyServicePrivat;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

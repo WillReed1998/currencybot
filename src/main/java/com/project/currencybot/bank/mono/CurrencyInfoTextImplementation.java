@@ -1,4 +1,4 @@
-package com.project.currencybot.mono;
+package com.project.currencybot.bank.mono;
 
 import java.io.IOException;
 import java.text.ParseException;

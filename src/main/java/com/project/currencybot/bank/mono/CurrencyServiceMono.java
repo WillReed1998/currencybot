@@ -1,4 +1,4 @@
-package com.project.currencybot.mono;
+package com.project.currencybot.bank.mono;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
