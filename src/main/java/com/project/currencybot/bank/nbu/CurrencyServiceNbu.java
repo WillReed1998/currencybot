@@ -20,20 +20,23 @@ public class CurrencyServiceNbu {
         JSONArray jsonArray = getObjects();
         List<CurrencyModelNbu> currencyList = new ArrayList<>();
 
-
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            CurrencyModelNbu currencyModelNbu = new CurrencyModelNbu();
-            currencyModelNbu.setCc(jsonObject.getString("cc"));
-            currencyModelNbu.setRate(Float.parseFloat(jsonObject.getString("rate")));
+            int r030 = jsonObject.getInt("r030");
 
-            currencyList.add(new CurrencyModelNbu());
+            if (r030 == 840 || r030 == 978) {
+                CurrencyModelNbu currencyModelNbu = new CurrencyModelNbu();
+                currencyModelNbu.setCc(jsonObject.getString("cc"));
+                currencyModelNbu.setRate(jsonObject.getBigDecimal("rate").floatValue());
+                currencyList.add(currencyModelNbu);
+            }
         }
+
         StringBuilder currencyInfo = new StringBuilder();
 
         for (CurrencyModelNbu currency : currencyList) {
-            currencyInfo.append("Курс покупки").append(currency.getCc())
-                    .append(" до курсу UAH").append(currency.getRate()).append("\n\n");
+            currencyInfo.append("Курс покупки ").append(currency.getCc())
+                    .append(" до курсу UAH ").append(currency.getRate()).append("\n\n");
         }
 
         return currencyInfo.toString();

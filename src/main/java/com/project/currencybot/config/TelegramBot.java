@@ -2,6 +2,8 @@ package com.project.currencybot.config;
 
 import com.project.currencybot.bank.mono.CurrencyModelMono;
 import com.project.currencybot.bank.mono.CurrencyServiceMono;
+import com.project.currencybot.bank.nbu.CurrencyModelNbu;
+import com.project.currencybot.bank.nbu.CurrencyServiceNbu;
 import com.project.currencybot.bank.privat.CurrencyModelPrivat;
 import com.project.currencybot.bank.privat.CurrencyServicePrivat;
 import lombok.AllArgsConstructor;
@@ -58,15 +60,23 @@ public class TelegramBot extends TelegramLongPollingBot {
                         throw new RuntimeException(e);
                     }
                     break;
+                case "/nbu":
+                    try {
+                        String currencyInfo = CurrencyServiceNbu.getCurrencyRateNbu(new CurrencyModelNbu());
+                        sendMessage(chatId, currencyInfo);
+                    } catch (IOException | ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
     }
 
-
     private void startCommandReceived(Long chatId, String name) {
-        String answer = "Вітаю, " + name + "\n" +
-                "Натисни /privat щоб отримати курс валют Приватбанку" + "\n" +
-                "Натисни /mono щоб отримати курс валют Приватбанку";
+        String answer = "Вітаю, " + name + "!" + "\n" +
+                "Натисни /privat щоб отримати курс валют Приватбанку." + "\n" +
+                "Натисни /mono щоб отримати курс валют Монобанку." + "\n" +
+                "Натисни /nbu щоб отримати курс валют НБУ.";
         sendMessage(chatId, answer);
     }
 
