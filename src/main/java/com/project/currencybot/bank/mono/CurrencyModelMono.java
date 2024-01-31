@@ -11,16 +11,12 @@ public class CurrencyModelMono {
     private float rateSell;
 
     public String getCurrencyName(int code) {
-        switch (code) {
-            case 980:
-                return "UAH";
-            case 840:
-                return "USD";
-            case 978:
-                return "EUR";
-            default:
-                return "Unknown";
-        }
+        return switch (code) {
+            case 980 -> "UAH";
+            case 840 -> "USD";
+            case 978 -> "EUR";
+            default -> "Unknown";
+        };
 
     }
 }

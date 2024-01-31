@@ -56,7 +56,6 @@ public class CurrencyServicePrivat {
             }
         }
 
-        JSONArray jsonArray = new JSONArray(response.toString());
-        return jsonArray;
+        return new JSONArray(response.toString());
     }
 }

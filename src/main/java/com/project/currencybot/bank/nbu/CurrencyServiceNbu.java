@@ -55,7 +55,6 @@ public class CurrencyServiceNbu {
             }
         }
 
-        JSONArray jsonArray = new JSONArray(response.toString());
-        return jsonArray;
+        return new JSONArray(response.toString());
     }
 }

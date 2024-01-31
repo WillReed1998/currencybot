@@ -33,7 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        CurrencyModelPrivat currencyModelPrivat = new CurrencyModelPrivat();
+        new CurrencyModelPrivat();
         CurrencyModelMono currencyModelMono = new CurrencyModelMono();
 
         if(update.hasMessage() && update.getMessage().hasText()){
